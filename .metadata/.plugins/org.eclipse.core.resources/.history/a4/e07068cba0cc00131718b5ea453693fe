@@ -1,0 +1,15 @@
+
+public class score {
+	int count;
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int len_args = args.length;
+		
+		while(true){
+			
+			
+		}
+	}
+
+}

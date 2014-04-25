@@ -1,0 +1,21 @@
+
+public class score {
+	int count;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int len_args = args.length;
+
+		while(true){
+			System.out.println("")
+
+		}
+	}
+	
+	public static void disp(String s){
+		System.out.println(s);
+	}
+	
+}
+
+
