@@ -59,10 +59,7 @@ public class score {
 				}
 				average = value / num_sentences;
 				displn("============================================================");
-				displn("");
-				displn("Based on your scores the Average for this article : " + average);
-				displn("");
-				displn("============================================================");
+				displn("Based on your scores the Average is : " + average);
 				write_file();
 				write_backup();
 				break;

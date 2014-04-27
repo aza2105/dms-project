@@ -58,11 +58,9 @@ public class score {
 					i++;
 				}
 				average = value / num_sentences;
-				displn("============================================================");
-				displn("");
+				displn("============================================================/ln");
 				displn("Based on your scores the Average for this article : " + average);
-				displn("");
-				displn("============================================================");
+				displn("/ln============================================================");
 				write_file();
 				write_backup();
 				break;
