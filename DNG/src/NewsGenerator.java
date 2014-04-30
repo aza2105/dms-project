@@ -45,31 +45,30 @@ public class NewsGenerator
 	}
 
 	public static void processCrimeReports(ArrayList<CrimeReport> crimeReports,
-			String[] templateSentences)
+			String[] templateSentences, String[] templateWords)
 	{
+
 		for (CrimeReport cr : crimeReports)
 		{
 			// if crime report is for a precinct
-			if (cr.isPrecinctReport)
-			{
-				double percentageChange
-				//if number of robberies has risen
-				if (cr.numRobberiesWTD > cr.numRobberiesWTDPrevYear)
-				{
-					
-				}
-				else if (cr.numRobberiesWTD < cr.numRobberiesWTDPrevYear)
-				{
-					
-				}
-					
-				
-			}
-			// otherwise it is for a borough
-			else
-			{
+			// if (cr.isPrecinctReport)
+			// {
+			double robberiesPercentChange = (cr.numRobberiesWTD - cr.numRobberiesWTDPrevYear) / 100;
+			double felAssaultsPercentChange = (cr.numFelAssaultsWTD - cr.numFelAssaultsWTDPrevYear) / 100;
+			double murdersPercentChange = (cr.numMurdersWTD - cr.numMurdersWTDPrevYear) / 100;
 
-			}
+			if (murdersPercentChange < 0)
+				System.out.println(templateSentences[0] + templateWords[4]
+						+ templateSentences[1] + robberiesPercentChange
+						+ "percent" + cr.numRobberiesWTD + "lower"
+						+ templateSentences[3]);
+
+			// }
+			// otherwise it is for a borough
+			// else
+			// {
+
+			// }
 		}
 
 	}
@@ -77,10 +76,27 @@ public class NewsGenerator
 	public static void main(String[] args)
 	{
 
+		String[] templateWords = { " rose ", " fell ", " lower ", " higher ",
+				" murders ", " rapes ", " robberies ", " felony assaults ",
+				" burglaries ", " grand larcenies ",
+				" automobile grand larcenies " };
+
 		String[] templateSentences = new String[MAX_SIZE];
 
-		templateSentences[0] = "The number of robberies in the <PRECINCT_NUM> this week is <PERCENTAGE> <LOWER/HIGHER> than the same time last year";
-		templateSentences[1] = "Other crimes that have seen a decline since the start of this year include <CRIMES>";
+		templateSentences[0] = "The number of ";
+		templateSentences[1] = " this week is ";
+		templateSentences[2] = " percent ";
+		templateSentences[3] = " than the same time last year";
+
+		// templateSentences[0] =
+		// "The number of robberies this week is <PERCENTAGE> <LOWER-HIGHER> than the same time last year";
+		// templateSentences[1] =
+		// "Also, felony assaults this week are <PERCENTAGE> <LOWER-HIGHER>.";
+		// templateSentences[2] =
+		// "Meanwhile, the number of murders <VERB> this week <PERCENTAGE> from the rate seen last year";
+
+		// templateSentences[1] =
+		// "Other crimes that have seen a decline since the start of this year include <CRIMES>";
 
 		templateSentences[10] = "Police records indicate that crime rates in <BOROUGH> are falling. ";
 		templateSentences[11] = "In the past month, a total of <NUM_CRIMES> <CRIME_TYPE> have been reported in the <BOROUGH>. ";
@@ -1157,6 +1173,7 @@ public class NewsGenerator
 		}
 
 		// iterate through the crime reports
+		processCrimeReports(crimeReports, templateSentences, templateWords);
 
 	}
 }
