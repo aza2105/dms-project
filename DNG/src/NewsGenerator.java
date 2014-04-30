@@ -49,7 +49,27 @@ public class NewsGenerator
 	{
 		for (CrimeReport cr : crimeReports)
 		{
+			// if crime report is for a precinct
+			if (cr.isPrecinctReport)
+			{
+				double percentageChange
+				//if number of robberies has risen
+				if (cr.numRobberiesWTD > cr.numRobberiesWTDPrevYear)
+				{
+					
+				}
+				else if (cr.numRobberiesWTD < cr.numRobberiesWTDPrevYear)
+				{
+					
+				}
+					
+				
+			}
+			// otherwise it is for a borough
+			else
+			{
 
+			}
 		}
 
 	}
@@ -57,14 +77,30 @@ public class NewsGenerator
 	public static void main(String[] args)
 	{
 
-		// return new CrimeReport();
+		String[] templateSentences = new String[MAX_SIZE];
+
+		templateSentences[0] = "The number of robberies in the <PRECINCT_NUM> this week is <PERCENTAGE> <LOWER/HIGHER> than the same time last year";
+		templateSentences[1] = "Other crimes that have seen a decline since the start of this year include <CRIMES>";
+
+		templateSentences[10] = "Police records indicate that crime rates in <BOROUGH> are falling. ";
+		templateSentences[11] = "In the past month, a total of <NUM_CRIMES> <CRIME_TYPE> have been reported in the <BOROUGH>. ";
+		templateSentences[12] = "This represents a <PERCENTAGE_CHANGE> <DROP/RISE> in the number of <CRIME_TYPE> from last year. ";
+		templateSentences[13] = "In the <BOROUGH>, last week witnessed ";
+		templateSentences[14] = "<NUM_CRIME> <CRIME_TYPE>";
+
+		templateSentences[15] = "In the <PRECINCT_NUMBER> precinct, <CRIME_TYPE> <FELL/ROSE> from <LAST_YEAR_NUMBER> to <CURRENT_YEAR_NUMBER>";
+		templateSentences[16] = "The number of <CRIME_TYPE> has <FALLEN/RISEN> from <BYGONE_YEAR_NUMBER> in <BYGONE_YEAR>"
+				+ "to <CURREN_YEAR_NUMBER> in <CURRENT_YEAR>";
+		templateSentences[17] = "More good news comes from the <PRECINCT_NUMBER> precinct. ";
+		templateSentences[18] = "Police records state that the number of <CRIME_TYPE> is now <PERCENTAGE> <LOWER/HIGHER> than it was in <BYGONE_YEAR>. ";
+		templateSentences[19] = "There were a total of <NUM_CRIME> complaints about <CRIME_TYPE> in the week from <START_DATE> through <END_DATE>. ";
 
 		/*
 		 * I've adapted the following code on how to read a file in Java line by
 		 * line from http://www.roseindia.net/java/beginners/java-read
 		 * -file-line-by-line.shtml
 		 */
-		// read the CSV file for this crime report
+
 		BufferedReader br;
 		DataInputStream dis;
 		FileInputStream fis;
@@ -133,6 +169,9 @@ public class NewsGenerator
 		Pattern p15 = Pattern
 				.compile("Shooting\\s+Inc.+,(\\S+),(\\S+),\\S+,(\\S+),(\\S+),\\S+,(\\S+),(\\S+),\\S+,(\\S+),(\\S+),(\\S+)");
 		Matcher m15 = p15.matcher("");
+
+		Pattern p30 = Pattern.compile("^\\D+(\\d+)pct\\.csv$");
+		Matcher m30 = p30.matcher("");
 
 		// instantiate an array list to hold all the crime reports
 		ArrayList<CrimeReport> crimeReports = new ArrayList<CrimeReport>();
@@ -329,9 +368,13 @@ public class NewsGenerator
 
 				// if source filename has pct.csv in its name then this is a
 				// precinct report
-				if (args[index].matches("^.*\\d+pct\\.csv$"))
+				m30.reset(args[index]);
+				if (m30.find())
 				{
 					isPrecinctReport = true;
+					if (isInteger(m30.group()))
+						precinct = Integer.parseInt(m30.group());
+
 				}
 				else
 					isPrecinctReport = false;
@@ -1112,23 +1155,6 @@ public class NewsGenerator
 				System.exit(1);
 			}
 		}
-
-		String[] templateSentences = new String[MAX_SIZE];
-
-		// initialize the array of completeSentence
-
-		templateSentences[0] = "Police records indicate that crime rates in <BOROUGH> are falling. ";
-		templateSentences[1] = "In the past month, a total of <NUM_CRIMES> <CRIME_TYPE> have been reported in the <BOROUGH>. ";
-		templateSentences[2] = "This represents a <PERCENTAGE_CHANGE> <DROP/RISE> in the number of <CRIME_TYPE> from last year. ";
-		templateSentences[3] = "In the <BOROUGH>, last week witnessed ";
-		templateSentences[4] = "<NUM_CRIME> <CRIME_TYPE>";
-
-		templateSentences[5] = "In the <PRECINCT_NUMBER> precinct, <CRIME_TYPE> <FELL/ROSE> from <LAST_YEAR_NUMBER> to <CURRENT_YEAR_NUMBER>";
-		templateSentences[6] = "The number of <CRIME_TYPE> has <FALLEN/RISEN> from <BYGONE_YEAR_NUMBER> in <BYGONE_YEAR>"
-				+ "to <CURREN_YEAR_NUMBER> in <CURRENT_YEAR>";
-		templateSentences[7] = "More good news comes from the <PRECINCT_NUMBER> precinct. ";
-		templateSentences[8] = "Police records state that the number of <CRIME_TYPE> is now <PERCENTAGE> <LOWER/HIGHER> than it was in <BYGONE_YEAR>. ";
-		templateSentences[9] = "There were a total of <NUM_CRIME> complaints about <CRIME_TYPE> in the week from <START_DATE> through <END_DATE>. ";
 
 		// iterate through the crime reports
 
