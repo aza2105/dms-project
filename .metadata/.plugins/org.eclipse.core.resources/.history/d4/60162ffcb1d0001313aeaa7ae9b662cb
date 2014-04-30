@@ -52,7 +52,7 @@ public class NewsGenerator
 			// if crime report is for a precinct
 			if (cr.isPrecinctReport)
 			{
-				double percentageChange;
+				double percentageChange
 				//if number of robberies has risen
 				if (cr.numRobberiesWTD > cr.numRobberiesWTDPrevYear)
 				{
