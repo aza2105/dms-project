@@ -1,5 +1,6 @@
 dms-project
 ===========
+Abdullah Al-Syed and Jayson Ng
 
 In order to run the News Generator, please run the java program from the command line as follows. The first argument is the precinct file (in CSV format) and the last argument is the borough file. The precinct has to be from the same borough. The output news is both printed to the screen and written to the file generated_news.txt. A sample session is illustrated below:
 
