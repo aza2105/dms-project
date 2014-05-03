@@ -62,6 +62,36 @@ public class NewsGenerator
 						+ templateSentences[1] + robberiesPercentChange
 						+ "percent" + cr.numRobberiesWTD + "lower"
 						+ templateSentences[3]);
+			else if (murdersPercentChange > 0)
+				System.out.println(templateSentences[0] + templateWords[4]
+						+ templateSentences[1] + robberiesPercentChange
+						+ "percent" + cr.numRobberiesWTD + "higher"
+						+ templateSentences[3]);
+
+			if (robberiesPercentChange < 0)
+				System.out.println("Also, " + templateSentences[0]
+						+ templateWords[4] + templateSentences[1]
+						+ robberiesPercentChange + "percent"
+						+ cr.numRobberiesWTD + "lower" + templateSentences[3]);
+			else if (robberiesPercentChange > 0)
+				System.out.println("In other news, " + templateSentences[0]
+						+ templateWords[4] + templateSentences[1]
+						+ robberiesPercentChange + "percent"
+						+ cr.numRobberiesWTD + "higher" + templateSentences[3]);
+
+			if (felAssaultsPercentChange < 0)
+				System.out
+						.println("Also, " + templateSentences[0]
+								+ templateWords[4] + templateSentences[1]
+								+ felAssaultsPercentChange + "percent"
+								+ cr.numFelAssaultsWTD + "lower"
+								+ templateSentences[3]);
+			else if (felAssaultsPercentChange > 0)
+				System.out.println("In other news, " + templateSentences[0]
+						+ templateWords[4] + templateSentences[1]
+						+ felAssaultsPercentChange + "percent"
+						+ cr.numFelAssaultsWTD + "higher"
+						+ templateSentences[3]);
 
 			// }
 			// otherwise it is for a borough
